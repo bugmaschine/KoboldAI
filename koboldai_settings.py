@@ -706,7 +706,7 @@ class model_settings(settings):
         self.modeldim    = -1     # Embedding dimension of your model (e.g. it's 4096 for GPT-J-6B and 2560 for GPT-Neo-2.7B)
         self.sampler_order = [6, 0, 1, 2, 3, 4, 5]
         self.newlinemode = "n"
-        self.lazy_load   = True # Whether or not to use torch_lazy_loader.py for transformers models in order to reduce CPU memory usage
+        self.lazy_load   = False # Whether or not to use torch_lazy_loader.py for transformers models in order to reduce CPU memory usage
         self.presets     = []   # Holder for presets
         self.selected_preset = ""
         self.uid_presets = []
@@ -1287,9 +1287,9 @@ class system_settings(settings):
         self.summary_tokenizer = None
         self.keep_img_gen_in_memory = False
         self.cookies = {} #cookies for colab since colab's URL changes, cookies are lost
-        self.experimental_features = False
+        self.experimental_features = True
         #check if bitsandbytes is installed
-        self.bit_8_available = False
+        self.bit_8_available = True # Dont Judge, im just lazy
         if importlib.util.find_spec("bitsandbytes") is not None and sys.platform.startswith('linux'): #We can install bitsandbytes, but it doesn't work on windows, so limit it here
             if torch.cuda.is_available():
                 for device in range(torch.cuda.device_count()):
